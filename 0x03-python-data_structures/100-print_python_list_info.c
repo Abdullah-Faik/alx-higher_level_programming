@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Python.h"
+#include "python3.4/Python.h"
 void print_python_list_info(PyObject *p)
 {
     int size, alloc, i;
