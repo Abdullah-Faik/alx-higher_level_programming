@@ -5,9 +5,11 @@ def roman_to_int(roman_string):
         return 0
     else:
         sum = 0
-        for i in range(len(roman_string)):
-            if i > 0 and rm[roman_string[i]] > rm[roman_string[i - 1]]:
-                sum += rm[roman_string[i]] - 2 * rm[roman_string[i - 1]]
+        for i in range(len(roman_string) - 1, -1, -1):
+            if roman_string[i] not in rm:
+                return 0
+            elif rm[roman_string[i]] < rm[roman_string[i + 1]]:
+                sum -= rm[roman_string[i]]
             else:
                 sum += rm[roman_string[i]]
         return sum
