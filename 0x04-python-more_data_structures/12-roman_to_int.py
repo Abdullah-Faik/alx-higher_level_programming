@@ -8,7 +8,8 @@ def roman_to_int(roman_string):
         for i in range(len(roman_string) - 1, -1, -1):
             if roman_string[i] not in rm:
                 return 0
-            elif rm[roman_string[i]] < rm[roman_string[i + 1]]:
+            elif i != len(roman_string) - 1 \
+                    and rm[roman_string[i]] < rm[roman_string[i + 1]]:
                 sum -= rm[roman_string[i]]
             else:
                 sum += rm[roman_string[i]]
