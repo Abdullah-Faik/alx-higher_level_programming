@@ -4,3 +4,4 @@ def print_sorted_dictionary(a_dictionary):
     a.sort()
     for x in a:
         print(x[0], ": ", x[1], sep="")
+
