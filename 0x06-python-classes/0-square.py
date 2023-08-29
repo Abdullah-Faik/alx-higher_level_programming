@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Square class initilization module."""
+"""Square class initilization module"""
 
 
 class Square:
