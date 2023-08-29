@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Node class"""
 
+
 class Node:
     """Node class"""
 
@@ -50,6 +51,7 @@ class Node:
             raise TypeError("next_node must be a Node object")
         else:
             self.__next_node = value
+
 
 class SinglyLinkedList:
     """SinglyLinkedList class"""
