@@ -172,12 +172,19 @@ class Square:
             print()
 
     def __str__(self):
-        """Returns a string similar to the one printed in my_print"""
-        string = ""
+        """__str__ method.
+        Returns:
+            string
+        """
         if self.__size == 0:
-            return string
-        string += "{}".format("\n" * self.__position[1])
-        string += "{}".format("\n".join(
-            [" " * self.__position[0] + "#" * self.__size] * self.__size))
-        return string[:-1]
-
+            return ""
+        for i in range(self.__position[1]):
+            print()
+        for i in range(self.__size):
+            for j in range(self.__position[0]):
+                print(" ", end="")
+            for j in range(self.__size):
+                print("#", end="")
+            if i != self.__size - 1:
+                print()
+        return ""
