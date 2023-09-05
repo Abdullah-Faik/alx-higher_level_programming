@@ -94,6 +94,3 @@ class Rectangle:
             return 0
         else:
             return 2 * self.__width + 2 * self.__height
-
-myrectangle =  Rectangle(10) 
-print("{} - {} => {} / {}".format(myrectangle.width, myrectangle.height, myrectangle.area(), myrectangle.perimeter()))
