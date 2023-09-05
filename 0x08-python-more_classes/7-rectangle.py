@@ -6,6 +6,7 @@ class Rectangle:
     """Rectangle class"""
 
     number_of_instances = 0
+    print_symbol = "#"
 
     def __init__(self, width=0, height=0):
         if type(width) is not int:
@@ -19,7 +20,7 @@ class Rectangle:
         self.__width = width
         self.__height = height
         Rectangle.number_of_instances += 1
-        self.print_symbol = "#"
+        self.print_symbol = Rectangle.print_symbol
 
     @property
     def width(self):
