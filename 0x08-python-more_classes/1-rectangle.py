@@ -2,9 +2,6 @@
 """Module 1-rectangle"""
 
 
-from collections.abc import Iterable
-
-
 class Rectangle:
     """Rectangle class"""
 
