@@ -2,6 +2,9 @@
 """Module 1-rectangle"""
 
 
+from collections.abc import Iterable
+
+
 class Rectangle:
     """Rectangle class"""
 
@@ -28,19 +31,8 @@ class Rectangle:
         """
         return self.__width
 
-    @property
-    def height(Self):
-        """
-        Retrieve height
-        Args:
-            None
-        Return:
-            self.__height
-        """
-        return Self.__height
-
-    @property.setter
-    def width(self, value=0):
+    @width.setter
+    def width(self, value):
         """
         Set width
         Args:
@@ -55,8 +47,19 @@ class Rectangle:
         else:
             self.__width = value
 
-    @property.setter
-    def height(self, value=0):
+    @property
+    def height(Self):
+        """
+        Retrieve height
+        Args:
+            None
+        Return:
+            self.__height
+        """
+        return Self.__height
+
+    @height.setter
+    def height(self, value):
         """
         Set height
         Args:
