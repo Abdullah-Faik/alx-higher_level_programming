@@ -1,4 +1,4 @@
-#!/usr/bin/pyhton3
+#!/usr/bin/python3
 """ This module prints My name is <first name> <last name> """
 
 
