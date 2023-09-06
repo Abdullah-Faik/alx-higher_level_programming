@@ -71,3 +71,9 @@ Traceback (most recent call last):
     File "<stdin>", line 1, in <module>
 TypeError: print_square() takes 1 positional argument but 2 were given
 
+>>> print_square("3")
+Traceback (most recent call last):
+    File "<stdin>", line 1, in <module>
+    File "4-print_square.py", line 6, in print_square
+        raise TypeError("size must be an integer")
+TypeError: size must be an integer
