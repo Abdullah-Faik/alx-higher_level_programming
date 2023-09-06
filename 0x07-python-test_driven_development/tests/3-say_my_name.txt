@@ -1,0 +1,31 @@
+>>> say_may_name = __import__('3-say_my_name').say_my_name
+
+>>> say_my_name("A", "B")
+My name is A B
+
+>>> say_my_name("Walter", "White")
+My name is Walter White
+
+>>> say_my_name("Bob")
+My name is Bob
+
+>>> say_my_name("A", 12)
+Traceback (most recent call last):
+    File "<stdin>", line 1, in <module>
+TypeError: last_name must be a string
+
+>>> say_my_name(12, "C")
+Traceback (most recent call last):
+    File "<stdin>", line 1, in <module>
+TypeError: first_name must be a string
+
+>>> say_my_name()
+Traceback (most recent call last):
+    File "<stdin>", line 1, in <module>
+TypeError: say_my_name() missing 2 required positional arguments: 'first_name' and 'last_name'
+
+>>> say_my_name("A", "D", "B")
+Traceback (most recent call last):
+    File "<stdin>", line 1, in <module>
+TypeError: say_my_name() takes 2 positional arguments but 3 were given
+
