@@ -12,5 +12,5 @@ def read_file(filename=""):
     if (type(filename) is not str):
         return
     with open(file=filename, mode="r", encoding="utf-8") as f:
-        print(f.read())
+        print(f.read(),end="")
     f.close()
