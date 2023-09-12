@@ -9,12 +9,13 @@ class Student:
         self.age = age
 
     def to_json(self, attrs=None):
-        d = {}
+        dicr = {}
         a = self.__dict__
-        if attrs == None:
+        if attrs is None:
             return a
+
         for att in attrs:
             if att not in a:
                 continue
-            d[att] = a[att]
-        return d
+            dicr[att] = a[att]
+        return dicr
