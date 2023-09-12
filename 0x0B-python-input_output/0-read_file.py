@@ -9,9 +9,7 @@ def read_file(filename=""):
     Args: file name
     Return: None
     """
-    if (type(filename)is not str):
+    if (type(filename) is not str):
         return
     with open(file=filename, mode="r", encoding="utf-8") as f:
         print(f.read())
-
-read_file(".gitignore")
