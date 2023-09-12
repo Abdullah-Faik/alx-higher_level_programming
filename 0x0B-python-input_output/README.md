@@ -82,6 +82,50 @@ with open("filename","mode" , buffering ) as file:
 the above code is safe because if any error occurs in the file operations then the file will be closed automatically and it will not cause memory leak
 
 
+## json file serialization
+
+first we import json module
+```python
+import json
+```
+then we create a data dictionary
+
+```python
+data = {
+    "name" : "abdullah faik",
+    "age" : 22,
+    "country" : "egypt"
+}
+```
+
+then we create a json file
+```python
+with open("data.json","w") as file:
+    json.dump(data,file)
+```
+then we read the json file
+```python
+with open("data.json","r") as file:
+    data = json.load(file)
+    print(data)
+
+output : {'name': 'abdullah faik', 'age': 22, 'country': 'egypt'}
+
+```
+
+
+## json file properties
+
+1. `indent` : indent the json file
+2. `separators` : change the separators
+3. `sort_keys` : sort the keys
+4. `ensure_ascii` : ensure ascii characters
+5. `skipkeys` : skip the keys
+6. `allow_nan` : allow nan values
+7. `check_circular` : check circular references
+
+
+
 
 ### cotributor
 - **Abdullah Faik** : [Abdullah-Faik](https://www.github.com/abdullah-faik)
