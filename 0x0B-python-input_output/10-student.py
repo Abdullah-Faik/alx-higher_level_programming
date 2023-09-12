@@ -8,12 +8,13 @@ class Student:
         self.last_name = last_name
         self.age = age
 
-    def to_json(self):
-        return self.__dict__
-
     def to_json(self, attrs=None):
         d = {}
         a = self.__dict__
+        if attrs == None:
+            return a
         for att in attrs:
+            if att not in a:
+                continue
             d[att] = a[att]
         return d
