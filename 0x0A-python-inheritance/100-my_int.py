@@ -3,6 +3,7 @@
 
 
 class MyInt(int):
+    """ class square"""
     def __init__(self, n) -> None:
         super().__init__()
         self.n = n
