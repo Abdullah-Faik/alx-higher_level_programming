@@ -56,7 +56,39 @@ Traceback (most recent call last):
 ...
 TypeError: name must be an integer
 
+>>> bg.integer_validator("name", float('inf'))
+Traceback (most recent call last):
+...
+TypeError: name must be an integer
 
+>>> bg.integer_validator("name", float('NaN'))
+Traceback (most recent call last):
+...
+TypeError: name must be an integer
 
-    
+>>> bg.integer_validator("name", float('-inf'))
+Traceback (most recent call last):
+...
+TypeError: name must be an integer
+
+>>> bg.integer_validator("name", float('1.5'))
+Traceback (most recent call last):
+...
+TypeError: name must be an integer
+
+>>> bg.integer_validator("name", float('1.0'))
+Traceback (most recent call last):
+...
+TypeError: name must be an integer
+
+>>> bg.integer_validator("name", float('0.0'))
+Traceback (most recent call last):
+...
+TypeError: name must be an integer
+
+>>> bg.integer_validator("name", float(2))
+Traceback (most recent call last):
+...
+TypeError: name must be an integer
+
 
