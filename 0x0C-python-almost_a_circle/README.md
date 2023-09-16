@@ -50,7 +50,7 @@ it aim to make application in
 - `__repr__` method is the representation of the class
 - `__del__` method is the destructor of the class
 - `__call__` method is the call of the class
--  the difference between self and cls is that self is used for instance variables while cls is used for class variables
+-  the difference between `self.class_atr` and `myclass.class_atr` is that self is used for instance variables while cls is used for class variables
 
 
 
