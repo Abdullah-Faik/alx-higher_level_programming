@@ -71,3 +71,18 @@ class BaseTest(unittest.TestCase):
         input = None
         expected = "[]"
         self.assertEqual(Base.to_json_string(input), expected)
+
+    def test_to_json_string(self):
+        """
+        Test to_json_string
+        """
+        jstr = Base.to_json_string(
+                [{'x': 2, 'width': 10, 'id': 1, 'height': 7, 'y': 8}]
+            )
+        self.assertEqual(
+                jstr, '[{"x": 2, "width": 10, "id": 1, "height": 7, "y": 8}]'
+                )
+        jstr = Base.to_json_string(None)
+        self.assertEqual(jstr, "[]")
+        jstr = Base.to_json_string([])
+        self.assertEqual(jstr, "[]")
