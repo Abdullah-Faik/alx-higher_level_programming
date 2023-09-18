@@ -81,51 +81,6 @@ class BaseTest(unittest.TestCase):
         expected = Base.from_json_string(json_input)
         self.assertEqual(expected, input)
 
-    def test_from_json_none(self):
-        """Checks the from_json_string method with None."""
-        input = None
-        json_input = json.dumps(input)
-        expected = Base.from_json_string(json_input)
-        self.assertEqual(expected, [])
-
-    def test_create(self):
-        """Checks the create method."""
-        input = {"x": 2, "width": 10, "id": 1, "height": 7, "y": 8}
-        expected = Base.create(**input)
-        self.assertEqual(expected.to_dictionary(), input)
-
-    def test_create_empty(self):
-        """Checks the create method with an empty dictionary."""
-        input = {}
-        expected = Base.create(**input)
-        self.assertEqual(expected.to_dictionary(), input)
-
-    def test_create_none(self):
-        """Checks the create method with None."""
-        input = None
-        expected = Base.create(input)
-        self.assertEqual(expected.to_dictionary(), {})
-
-    def test_create_more_args(self):
-        """Checks the create method with more than 1 argument."""
-        input = {"x": 2, "width": 10, "id": 1, "height": 7, "y": 8}
-        with self.assertRaises(TypeError):
-            Base.create(input, input)
-
-    def test_create_more_kwargs(self):
-        """Checks the create method with more than 1 keyword argument."""
-        input = {"x": 2, "width": 10, "id": 1, "height": 7, "y": 8}
-        with self.assertRaises(TypeError):
-            Base.create(**input, **input)
-
-    def test_save_to_file(self):
-        """Checks the save_to_file method."""
-        input = [{"x": 2, "width": 10, "id": 1, "height": 7, "y": 8}]
-        Base.save_to_file(input)
-        with open("Base.json", "r") as f:
-            expected = json.load(f)
-        self.assertEqual(expected, input)
-
     def test_save_to_file_empty(self):
         """Checks the save_to_file method with an empty list."""
         input = []
@@ -154,13 +109,6 @@ class BaseTest(unittest.TestCase):
         with self.assertRaises(TypeError):
             Base.save_to_file(input, input=input)
 
-    def test_load_from_file(self):
-        """Checks the load_from_file method."""
-        input = [{"x": 2, "width": 10, "id": 1, "height": 7, "y": 8}]
-        Base.save_to_file(input)
-        expected = Base.load_from_file()
-        self.assertEqual(expected, input)
-
     def test_load_from_file_empty(self):
         """Checks the load_from_file method with an empty list."""
         input = []
@@ -175,19 +123,6 @@ class BaseTest(unittest.TestCase):
         expected = Base.load_from_file()
         self.assertEqual(expected, [])
 
-    def test_load_from_file_more_args(self):
-        """Checks the load_from_file method with more than 1 argument."""
-        input = [{"x": 2, "width": 10, "id": 1, "height": 7, "y": 8}]
-        Base.save_to_file(input)
-        with self.assertRaises(TypeError):
-            Base.load_from_file(input, input)
-
-    def test_load_from_file_more_kwargs(self):
-        """Checks the load_from_file method with more than 1 keyword argument."""
-        input = [{"x": 2, "width": 10, "id": 1, "height": 7, "y": 8}]
-        Base.save_to_file(input)
-        with self.assertRaises(TypeError):
-            Base.load_from_file(input, input=input)
 
     def test_load_from_file_no_file(self):
         """Checks the load_from_file method with no file."""

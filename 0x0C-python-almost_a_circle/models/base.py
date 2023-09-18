@@ -55,14 +55,13 @@ class Base:
 
     @classmethod
     def create(cls, **dictionary):
-        """create a dummy instance"""
-        dummy = None
+        """Create an instance of the class and update its attributes from the dictionary"""
         if cls.__name__ == "Rectangle":
             dummy = cls(1, 1)
         elif cls.__name__ == "Square":
             dummy = cls(1)
-        if dummy is not None:
-            dummy.update(**dictionary)
-            return dummy
         else:
             return None
+
+        dummy.update(**dictionary)
+        return dummy
