@@ -110,3 +110,12 @@ class Rectangle(Base):
             raise TypeError(f"{property_name} must be an integer")
         if value < 0:
             raise ValueError(f"{property_name} must be >= 0")
+
+    def to_dictionary(self):
+        return {
+            "id": self.id,
+            "width": self.width,
+            "height": self.height,
+            "x": self.x,
+            "y": self.y
+        }

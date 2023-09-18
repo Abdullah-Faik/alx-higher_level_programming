@@ -5,3 +5,4 @@ r.width = 5
 r.height = 3
 print(r)
 print(r.area())
+print(r.to_dictionary())
