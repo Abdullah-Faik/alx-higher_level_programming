@@ -58,3 +58,6 @@ class TestBase(unittest.TestCase):
     def test_load_from_file(self):
         """Test for load_from_file method"""
         pass
+
+if __name__ == '__main__':
+    unittest.main()

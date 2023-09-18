@@ -10,6 +10,10 @@ from models.base import Base
 
 class Test_0_RectangleID(unittest.TestCase):
     """Test cases for the 'id' attribute of Rectangle."""
+    @classmethod
+    def setUpClass(cls):
+        """Common setup code that runs before each test."""
+        Base.reset()
 
     def setUp(self):
         """Common setup code that runs before each test."""
@@ -593,3 +597,6 @@ class Test_8_RectangleUpdate(unittest.TestCase):
         self.rectangle.update(id=89, width=1, height=2, x=3, y=4)
         self.assertEqual(self.rectangle.__str__(),
                          "[Rectangle] (89) 3/4 - 1/2")
+
+if __name__ == '__main__':
+    unittest.main()
