@@ -105,6 +105,7 @@ class Rectangle(Base):
             raise ValueError("{} must be > 0".format(name))
 
     def position_validate(self, name, val):
+        """validates if the value is an int"""
         if type(val) is not int:
             raise TypeError("{} must be a int".format(name))
         if val < 0:
