@@ -2,6 +2,7 @@
 """file contain square class"""
 
 from models.rectangle import Rectangle
+import json
 
 
 class Square(Rectangle):
@@ -40,3 +41,4 @@ class Square(Rectangle):
     def to_dictionary(self):
         """Returns the dictionary representation of a Square."""
         return {"id": self.id, "size": self.size, "x": self.x, "y": self.y}
+    
