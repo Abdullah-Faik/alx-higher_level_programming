@@ -43,12 +43,21 @@ class Base:
         with open(cls.__name__ + ".json", "w") as f:
             f.write(cls.to_json_string(list_objs))
 
-    # @classmethod
-    # def create(cls, **dictionary):
-    #     """create a dummy instance"""
-    #     if cls.__name__ == "Rectangle":
-    #         dummy = cls(1, 1)
-    #     elif cls.__name__ == "Square":
-    #         dummy = cls(1)
-    #     dummy.update(**dictionary)
-    #     return dummy
+    @classmethod
+    def load_from_file(cls):
+        """load from file"""
+        try:
+            with open(cls.__name__ + ".json", "r") as f:
+                return [cls.create(**i) for i in cls.from_json_string(f.read())]
+        except FileNotFoundError:
+            return []
+        
+    @classmethod
+    def create(cls, **dictionary):
+        """create a dummy instance"""
+        if cls.__name__ == "Rectangle":
+            dummy = cls(1, 1)
+        elif cls.__name__ == "Square":
+            dummy = cls(1)
+        dummy.update(**dictionary)
+        return dummy
