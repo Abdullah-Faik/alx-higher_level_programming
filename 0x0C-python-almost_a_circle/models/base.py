@@ -13,3 +13,7 @@ class Base:
         else:
             Base.__nb_objects += 1
             self.id = self.__nb_objects
+
+    def reset():
+        """reset nb_objects"""
+        Base.__nb_objects = 0
