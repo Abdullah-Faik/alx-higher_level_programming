@@ -3,6 +3,7 @@
 import unittest
 import json
 from models.base import Base
+from models.rectangle import Rectangle
 
 
 class BaseTest(unittest.TestCase):
@@ -77,12 +78,32 @@ class BaseTest(unittest.TestCase):
         Test to_json_string
         """
         jstr = Base.to_json_string(
-                [{'x': 2, 'width': 10, 'id': 1, 'height': 7, 'y': 8}]
-            )
+            [{'x': 2, 'width': 10, 'id': 1, 'height': 7, 'y': 8}]
+        )
         self.assertEqual(
-                jstr, '[{"x": 2, "width": 10, "id": 1, "height": 7, "y": 8}]'
-                )
+            jstr, '[{"x": 2, "width": 10, "id": 1, "height": 7, "y": 8}]'
+        )
         jstr = Base.to_json_string(None)
         self.assertEqual(jstr, "[]")
         jstr = Base.to_json_string([])
         self.assertEqual(jstr, "[]")
+
+    def test_from_json_string(self):
+        """ Test from_json_string """
+        list_input = [
+            {'id': 89, 'width': 10, 'height': 4},
+            {'id': 7, 'width': 1, 'height': 7}
+        ]
+        json_list_input = Base.to_json_string(list_input)
+        list_output = Base.from_json_string(json_list_input)
+        self.assertEqual(list_output, list_input)
+        self.assertEqual(Base.from_json_string(None), [])
+        self.assertEqual(Base.from_json_string(''), [])
+
+    def test_create(self):
+        """ Test create """
+        r1 = Rectangle(3, 5, 1, 1, 1)
+        r1_dictionary = r1.to_dictionary()
+        r2 = Rectangle.create(**r1_dictionary)
+        self.assertNotEqual(r1, r2)
+        self.assertEqual(r1.to_dictionary(), r2.to_dictionary())
