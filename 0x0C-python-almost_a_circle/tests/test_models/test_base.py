@@ -108,6 +108,16 @@ class BaseTest(unittest.TestCase):
         self.assertNotEqual(r1, r2)
         self.assertEqual(r1.to_dictionary(), r2.to_dictionary())
 
+    def test_2_create(self):
+        """ Test create """
+        dict_input = {'id': 89, 'width': 10, 'height': 4}
+        r1 = Rectangle.create(**dict_input)
+        self.assertNotEqual(r1.to_dictionary(), dict_input)
+        dict_out = {'id': 89, 'width': 10, 'height': 4, 'x': 0, 'y': 0}
+        self.assertEqual(r1.to_dictionary(), dict_out)
+        r2 = Rectangle(10, 4, 0, 0, 89)
+        self.assertEqual(r1.to_dictionary(), r2.to_dictionary())
+
     def test_load_from_file(self):
         """ Test load_from_file """
         r1 = Rectangle(10, 7, 2, 8, 1)
@@ -126,7 +136,16 @@ class BaseTest(unittest.TestCase):
         list_rectangles_output = Rectangle.load_from_file()
         self.assertEqual(list_rectangles_output, [])
 
-    def test_save_to_file(self):
+    def test_0_save_to_file(self):
+        """ Test save_to_file """
+        Rectangle.save_to_file(None)
+        with open("Rectangle.json", "r") as f:
+            self.assertEqual(f.read(), "[]")
+        Rectangle.save_to_file([])
+        with open("Rectangle.json", "r") as f:
+            self.assertEqual(f.read(), "[]")
+
+    def test_1_save_to_file(self):
         """ Test save_to_file """
         r1 = Rectangle(10, 7, 2, 8, 1)
         r2 = Rectangle(2, 4, 0, 0, 2)
@@ -136,9 +155,3 @@ class BaseTest(unittest.TestCase):
                 json.loads(f.read()),
                 [r1.to_dictionary(), r2.to_dictionary()]
             )
-        Rectangle.save_to_file(None)
-        with open("Rectangle.json", "r") as f:
-            self.assertEqual(json.loads(f.read()), [])
-        Rectangle.save_to_file([])
-        with open("Rectangle.json", "r") as f:
-            self.assertEqual(json.loads(f.read()), [])
