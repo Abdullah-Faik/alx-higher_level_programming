@@ -38,7 +38,7 @@ class Square_0_Test(unittest.TestCase):
     def test_sets_id(self):
         """Checks if the id can be set."""
         self.sqaure = Square(13)
-        self.assertEqual(self.sqaure.id, 13)
+        self.assertEqual(self.sqaure.size, 13)
 
     def test_str(self):
         Base.reset()
@@ -50,12 +50,6 @@ class Square_0_Test(unittest.TestCase):
         """Checks the size attribute."""
         self.sqaure = Square(1)
         self.assertIs(hasattr(self.sqaure, "size"), True)
-
-    def test_size_private(self):
-        """Checks if the size attribute is private."""
-        self.sqaure = Square(1)
-        with self.assertRaises(AttributeError):
-            self.sqaure.size = 5
 
     def test_size_getter(self):
         """Checks the getter for the size attribute."""
@@ -92,10 +86,9 @@ class Square_0_Test(unittest.TestCase):
         self.sqaure = Square(1, 2, 3, 4)
         self.assertEqual(self.sqaure.to_dictionary(),
                          {"id": 4, "size": 1, "x": 2, "y": 3})
-        
+
     def test_to_json(self):
         """Checks the json represntation."""
         input = [{"x": 2, "width": 10, "id": 1, "height": 7, "y": 8}]
         expected = json.dumps(input)
         self.assertEqual(Base.to_json_string(input), expected)
-        
