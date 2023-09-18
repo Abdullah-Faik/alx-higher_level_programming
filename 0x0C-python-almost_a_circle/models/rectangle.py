@@ -112,6 +112,7 @@ class Rectangle(Base):
             raise ValueError(f"{property_name} must be >= 0")
 
     def to_dictionary(self):
+        """Return a dictionary representation of the rectangle"""
         return {
             "id": self.id,
             "width": self.width,
