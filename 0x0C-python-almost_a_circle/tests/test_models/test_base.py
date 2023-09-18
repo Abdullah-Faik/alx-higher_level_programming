@@ -1,63 +1,195 @@
 #!/usr/bin/python3
-"""Unittest for base.py"""
-
+"""Unittest for the Base class."""
 import unittest
+import json
 from models.base import Base
 
 
-class TestBase(unittest.TestCase):
-    """Test cases for base.py"""
+class BaseTest(unittest.TestCase):
+    """Tests for the Base class."""
 
-    def test_id(self):
-        """Test for id"""
-        b1 = Base()
-        self.assertEqual(b1.id, 1)
-        b2 = Base()
-        self.assertEqual(b2.id, 2)
-        b3 = Base(12)
-        self.assertEqual(b3.id, 12)
-        b4 = Base()
-        self.assertEqual(b4.id, 3)
-        b5 = Base(-1)
-        self.assertEqual(b5.id, -1)
-        b6 = Base(0)
-        self.assertEqual(b6.id, 0)
-        b7 = Base(12)
-        self.assertEqual(b7.id, 12)
-        b8 = Base(12.5)
-        self.assertEqual(b8.id, 12.5)
-        b9 = Base("string")
-        self.assertEqual(b9.id, "string")
-        b10 = Base([1, 2, 3])
-        self.assertEqual(b10.id, [1, 2, 3])
-        b11 = Base((1, 2, 3))
-        self.assertEqual(b11.id, (1, 2, 3))
-        b12 = Base({1, 2, 3})
-        self.assertEqual(b12.id, {1, 2, 3})
-        b13 = Base({"a": 1, "b": 2, "c": 3})
-        self.assertEqual(b13.id, {"a": 1, "b": 2, "c": 3})
-        b14 = Base(None)
-        self.assertEqual(b14.id, 4)
+    def setUp(self):
+        """Initializes the __nb_objects attribute before each test."""
+        self.assertIs(hasattr(Base, "_Base__nb_objects"), True)
+        Base._Base__nb_objects = 0
 
-    def test_to_json_string(self):
-        """Test for to_json_string method"""
-        pass
+    def test_id_type(self):
+        """Checks if the id is an integer type."""
+        my_class = Base()
+        self.assertIs(type(my_class.id), int)
 
-    def test_save_to_file(self):
-        """Test for save_to_file method"""
-        pass
+    def test_id_increments(self):
+        """Checks if the ids increment."""
+        for i in range(1, 6):
+            with self.subTest(i=i):
+                my_class = Base()
+                self.assertEqual(my_class.id, i)
 
-    def test_from_json_string(self):
-        """Test for from_json_string method"""
-        pass
+    def test_sets_id(self):
+        """Checks if the id can be set."""
+        my_class = Base(13)
+        self.assertEqual(my_class.id, 13)
+
+    def test_sets_id_increments(self):
+        """Checks if the ids increment after setting an id."""
+        for i in range(1, 10):
+            with self.subTest(i=i):
+                if i == 5:
+                    my_class = Base(13)
+                    self.assertEqual(my_class.id, 13)
+                else:
+                    my_class = Base()
+                    if i < 5:
+                        self.assertEqual(my_class.id, i)
+                    else:
+                        self.assertEqual(my_class.id, i - 1)
+
+    def test_sets_negative_id(self):
+        """Checks if the id can be set with a negative integer."""
+        my_class = Base(-7)
+        self.assertEqual(my_class.id, -7)
+
+    def test_to_json(self):
+        """Checks the json represntation."""
+        input = [{"x": 2, "width": 10, "id": 1, "height": 7, "y": 8}]
+        expected = json.dumps(input)
+        self.assertEqual(Base.to_json_string(input), expected)
+
+    def test_to_json_empty(self):
+        """Checks the json represntation with an empty list."""
+        input = []
+        expected = "[]"
+        self.assertEqual(Base.to_json_string(input), expected)
+
+    def test_to_json_none(self):
+        """Checks the json represntation with None."""
+        input = None
+        expected = "[]"
+        self.assertEqual(Base.to_json_string(input), expected)
+
+    def test_from_json(self):
+        """Checks the from_json_string method."""
+        input = [{"x": 2, "width": 10, "id": 1, "height": 7, "y": 8}]
+        json_input = json.dumps(input)
+        expected = Base.from_json_string(json_input)
+        self.assertEqual(expected, input)
+
+    def test_from_json_empty(self):
+        """Checks the from_json_string method with an empty list."""
+        input = []
+        json_input = json.dumps(input)
+        expected = Base.from_json_string(json_input)
+        self.assertEqual(expected, input)
+
+    def test_from_json_none(self):
+        """Checks the from_json_string method with None."""
+        input = None
+        json_input = json.dumps(input)
+        expected = Base.from_json_string(json_input)
+        self.assertEqual(expected, [])
 
     def test_create(self):
-        """Test for create method"""
-        pass
+        """Checks the create method."""
+        input = {"x": 2, "width": 10, "id": 1, "height": 7, "y": 8}
+        expected = Base.create(**input)
+        self.assertEqual(expected.to_dictionary(), input)
+
+    def test_create_empty(self):
+        """Checks the create method with an empty dictionary."""
+        input = {}
+        expected = Base.create(**input)
+        self.assertEqual(expected.to_dictionary(), input)
+
+    def test_create_none(self):
+        """Checks the create method with None."""
+        input = None
+        expected = Base.create(input)
+        self.assertEqual(expected.to_dictionary(), {})
+
+    def test_create_more_args(self):
+        """Checks the create method with more than 1 argument."""
+        input = {"x": 2, "width": 10, "id": 1, "height": 7, "y": 8}
+        with self.assertRaises(TypeError):
+            Base.create(input, input)
+
+    def test_create_more_kwargs(self):
+        """Checks the create method with more than 1 keyword argument."""
+        input = {"x": 2, "width": 10, "id": 1, "height": 7, "y": 8}
+        with self.assertRaises(TypeError):
+            Base.create(**input, **input)
+
+    def test_save_to_file(self):
+        """Checks the save_to_file method."""
+        input = [{"x": 2, "width": 10, "id": 1, "height": 7, "y": 8}]
+        Base.save_to_file(input)
+        with open("Base.json", "r") as f:
+            expected = json.load(f)
+        self.assertEqual(expected, input)
+
+    def test_save_to_file_empty(self):
+        """Checks the save_to_file method with an empty list."""
+        input = []
+        Base.save_to_file(input)
+        with open("Base.json", "r") as f:
+            expected = json.load(f)
+        self.assertEqual(expected, input)
+
+    def test_save_to_file_none(self):
+        """Checks the save_to_file method with None."""
+        input = None
+        Base.save_to_file(input)
+        with open("Base.json", "r") as f:
+            expected = json.load(f)
+        self.assertEqual(expected, [])
+
+    def test_save_to_file_more_args(self):
+        """Checks the save_to_file method with more than 1 argument."""
+        input = [{"x": 2, "width": 10, "id": 1, "height": 7, "y": 8}]
+        with self.assertRaises(TypeError):
+            Base.save_to_file(input, input)
+
+    def test_save_to_file_more_kwargs(self):
+        """Checks the save_to_file method with more than 1 keyword argument."""
+        input = [{"x": 2, "width": 10, "id": 1, "height": 7, "y": 8}]
+        with self.assertRaises(TypeError):
+            Base.save_to_file(input, input=input)
 
     def test_load_from_file(self):
-        """Test for load_from_file method"""
-        pass
+        """Checks the load_from_file method."""
+        input = [{"x": 2, "width": 10, "id": 1, "height": 7, "y": 8}]
+        Base.save_to_file(input)
+        expected = Base.load_from_file()
+        self.assertEqual(expected, input)
 
-if __name__ == '__main__':
-    unittest.main()
+    def test_load_from_file_empty(self):
+        """Checks the load_from_file method with an empty list."""
+        input = []
+        Base.save_to_file(input)
+        expected = Base.load_from_file()
+        self.assertEqual(expected, input)
+
+    def test_load_from_file_none(self):
+        """Checks the load_from_file method with None."""
+        input = None
+        Base.save_to_file(input)
+        expected = Base.load_from_file()
+        self.assertEqual(expected, [])
+
+    def test_load_from_file_more_args(self):
+        """Checks the load_from_file method with more than 1 argument."""
+        input = [{"x": 2, "width": 10, "id": 1, "height": 7, "y": 8}]
+        Base.save_to_file(input)
+        with self.assertRaises(TypeError):
+            Base.load_from_file(input, input)
+
+    def test_load_from_file_more_kwargs(self):
+        """Checks the load_from_file method with more than 1 keyword argument."""
+        input = [{"x": 2, "width": 10, "id": 1, "height": 7, "y": 8}]
+        Base.save_to_file(input)
+        with self.assertRaises(TypeError):
+            Base.load_from_file(input, input=input)
+
+    def test_load_from_file_no_file(self):
+        """Checks the load_from_file method with no file."""
+        expected = Base.load_from_file()
+        self.assertEqual(expected, [])
