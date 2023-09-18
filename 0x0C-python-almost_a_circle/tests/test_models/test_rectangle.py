@@ -598,5 +598,116 @@ class Test_8_RectangleUpdate(unittest.TestCase):
         self.assertEqual(self.rectangle.__str__(),
                          "[Rectangle] (89) 3/4 - 1/2")
 
-if __name__ == '__main__':
-    unittest.main()
+    def test_dict(self):
+        """Test the 'update' method for the default case."""
+        self.rectangle = Rectangle(10, 10, 10, 10, 10)
+        excepted = {'id': 89, 'width': 1, 'height': 2, 'x': 3, 'y': 4}
+        self.rectangle.update(**excepted)
+        self.assertEqual(self.rectangle.to_dictionary(), excepted)
+
+
+class Test_9_Baseother(unittest.TestCase):
+    """Test cases for the  method of Base."""
+
+    @classmethod
+    def setUpClass(self):
+        """Common setup code that runs before each test."""
+        Base.reset()
+
+    def setUp(self):
+        """Common setup code that runs before each test."""
+        self.rectangle = None
+        Test_9_Baseother.setUpClass()
+
+    def tearDown(self):
+        self.rectangle = None
+
+    def test_0_to_json(self):
+        self.rectangle = Rectangle(10, 10, 10, 10, 10)
+        q1 = self.rectangle.to_json_string([self.rectangle.to_dictionary()])
+        self.assertEqual(type(q1), str)
+
+    def test_1_to_json(self):
+        self.rectangle = Rectangle(10, 10, 10, 10, 10)
+        q1 = self.rectangle.to_json_string(None)
+        self.assertEqual(q1, "[]")
+
+    def test_2_to_json(self):
+        self.rectangle = Rectangle(10, 10, 10, 10, 10)
+        q1 = self.rectangle.to_json_string([])
+        self.assertEqual(q1, "[]")
+
+    def test_3_to_json(self):
+        self.rectangle = Rectangle(10, 10)
+        q1 = self.rectangle.to_json_string([self.rectangle.to_dictionary()])
+        q2 = Base.to_json_string([self.rectangle.to_dictionary()])
+        self.assertEqual(q1, q2)
+
+    def test_4_to_json(self):
+        self.rectangle = Rectangle(10, 10)
+        q = {'id': 1, 'width': 10, 'height': 10, 'x': 0, 'y': 0}
+        q1 = Base.to_json_string([q])
+        self.assertNotEqual(q1, q)
+
+# class Test_9_RectangeToDIir(unittest.TestCase):
+#     """Test cases for the 'to_dictionary' method of Rectangle."""
+
+#     @classmethod
+#     def setUpClass(cls):
+#         """Common setup code that runs before each test."""
+#         Base.reset()
+
+#     def setUp(self):
+#         """Common setup code that runs before each test."""
+#         self.rectangle = None
+#         Test_9_RectangeToDIir.setUpClass()
+
+#     def tearDown(self):
+#         """Common cleanup code that runs after each test."""
+#         self.rectangle = None
+
+#     def test_to_dictionary_for_default(self):
+#         """Test the 'to_dictionary' method for the default case."""
+#         self.rectangle = Rectangle(10, 2, 1, 9)
+#         expected = {'x': 1, 'y': 9, 'id': 1, 'height': 2, 'width': 10}
+#         self.assertEqual(self.rectangle.to_dictionary(), expected)
+
+#     def test_to_dictionary_for_full_rectangle(self):
+#         """Test the 'to_dictionary' method for a full rectangle."""
+#         self.rectangle = Rectangle(10, 2, 1, 9, 12)
+#         expected = {'x': 1, 'y': 9, 'id': 12, 'height': 2, 'width': 10}
+#         self.assertEqual(self.rectangle.to_dictionary(), expected)
+
+#     def test_to_dictionary_for_custom_rectangle(self):
+#         """Test the 'to_dictionary' method for a custom rectangle."""
+#         self.rectangle = Rectangle(10, 2, 1, 9, 12)
+#         self.rectangle.width = 1
+#         self.rectangle.height = 1
+#         self.rectangle.x = 1
+#         self.rectangle.y = 1
+#         expected = {'x': 1, 'y': 1, 'id': 12, 'height': 1, 'width': 1}
+#         self.assertEqual(self.rectangle.to_dictionary(), expected)
+
+#     def test_to_dictionary_for_more_args(self):
+#         """Test the 'to_dictionary' method for more than 1 argument."""
+#         self.rectangle = Rectangle(10, 2, 1, 9, 12)
+#         with self.assertRaises(TypeError):
+#             self.rectangle.to_dictionary(1)
+
+#     def test_to_dictionary_for_more_kwargs(self):
+#         """Test the 'to_dictionary' method for more than 1 keyword argument."""
+#         self.rectangle = Rectangle(10, 2, 1, 9, 12)
+#         self.rectangle.to_dictionary(x=1, y=1)
+#         self.assertEqual(self.rectangle.to_dictionary(), )
+
+#     def test_to_dictionary_for_no_args(self):
+#         """Test the 'to_dictionary' method for no arguments."""
+#         self.rectangle = Rectangle(10, 2, 1, 9, 12)
+#         with self.assertRaises(TypeError):
+#             self.rectangle.to_dictionary()
+
+#     def test_to_dictionary_for_no_kwargs(self):
+#         """Test the 'to_dictionary' method for no keyword arguments."""
+#         self.rectangle = Rectangle(10, 2, 1, 9, 12)
+#         with self.assertRaises(TypeError):
+#             self.rectangle.to_dictionary()
