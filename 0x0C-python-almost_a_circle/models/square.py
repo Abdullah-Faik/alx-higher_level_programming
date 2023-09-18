@@ -10,22 +10,29 @@ class Square(Rectangle):
     def __init__(self, size, x=0, y=0, id=None):
         """Initialize Square instance."""
         super().__init__(size, size, x, y, id)
-        self.__size = size
 
     @property
     def size(self):
         """Getter for size attribute."""
-        return self.__size
+        return self.width
 
     @size.setter
     def size(self, val):
         """Setter for size attribute."""
-        self.__size = val
         self.width = val
         self.height = val
 
     def __str__(self):
         """Returns the string representation of the Square instance."""
         return "[Square] ({:d}) {:d}/{:d} - {:d}".format(
-            self.id, self.x, self.y, self.width
-        )
+            self.id, self.x, self.y, self.size)
+
+    def update(self, *args, **kwargs):
+        """Update the Square instance."""
+        if args:
+            attrs = ["id", "size", "x", "y"]
+            for i, e in enumerate(args):
+                setattr(self, attrs[i], e)
+        else:
+            for k, v in kwargs.items():
+                setattr(self, k, v)
