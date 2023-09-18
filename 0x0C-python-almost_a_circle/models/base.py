@@ -51,7 +51,7 @@ class Base:
                 return [cls.create(**i) for i in cls.from_json_string(f.read())]
         except FileNotFoundError:
             return []
-        
+
     @classmethod
     def create(cls, **dictionary):
         """create a dummy instance"""
