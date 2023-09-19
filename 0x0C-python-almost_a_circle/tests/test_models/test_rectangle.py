@@ -221,6 +221,16 @@ class Test_2_RectangleHeight(unittest.TestCase):
         """ Test setting width with zero"""
         with self.assertRaises(ValueError):
             self.rectangle = Rectangle(1, -2)
+        
+    def test_Set_width_With_zero(self):
+        """test seeting width with zero"""
+        with self.assertRaises(ValueError):
+            self.rectangle = Rectangle(0, 1)
+    
+    def test_Set_height_With_zero(self):
+        """test seeting width with zero"""
+        with self.assertRaises(ValueError):
+            self.rectangle = Rectangle(1, 0)
 
 
 class Test_3_RectangleX(unittest.TestCase):
