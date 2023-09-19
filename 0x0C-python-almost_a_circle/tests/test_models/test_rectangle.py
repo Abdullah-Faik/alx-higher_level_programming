@@ -116,6 +116,28 @@ class Test_1_RectangleWidth (unittest.TestCase):
         self.rectangle = Rectangle(10, 2)
         with self.assertRaises(TypeError):
             self.rectangle.width = None
+        
+    def test_set_width_with_string(self):
+        """ Test setting width with string"""
+        with self.assertRaises(TypeError):
+            self.rectangle = Rectangle("1", 2)
+        
+    def test_set_width_with_float(self):
+        """ Test setting width with float"""
+        self.rectangle = Rectangle(1, 2)
+        with self.assertRaises(TypeError):
+            self.rectangle.width = "1"
+        
+    def test_set_width_with_negative(self):
+        """ Test setting width with negative"""
+        self.rectangle = Rectangle(1, 2)
+        with self.assertRaises(ValueError):
+            self.rectangle.width = -1
+    
+    def test_set_width_with_negative_1(self):
+        """ Test setting width with zero"""
+        with self.assertRaises(ValueError):
+            self.rectangle = Rectangle(-1, 2)
 
 
 class Test_2_RectangleHeight(unittest.TestCase):
@@ -177,6 +199,28 @@ class Test_2_RectangleHeight(unittest.TestCase):
         self.rectangle = Rectangle(10, 2)
         with self.assertRaises(TypeError):
             self.rectangle.width = None
+
+    def test_set_width_with_string(self):
+        """ Test setting width with string"""
+        with self.assertRaises(TypeError):
+            self.rectangle = Rectangle(1, "2")
+        
+    def test_set_width_with_float(self):
+        """ Test setting width with float"""
+        self.rectangle = Rectangle(1, 2)
+        with self.assertRaises(TypeError):
+            self.rectangle.height = "1"
+        
+    def test_set_width_with_negative(self):
+        """ Test setting width with negative"""
+        self.rectangle = Rectangle(1, 2)
+        with self.assertRaises(ValueError):
+            self.rectangle.height = -1
+    
+    def test_set_width_with_negative_1(self):
+        """ Test setting width with zero"""
+        with self.assertRaises(ValueError):
+            self.rectangle = Rectangle(1, -2)
 
 
 class Test_3_RectangleX(unittest.TestCase):
@@ -268,6 +312,28 @@ class Test_3_RectangleX(unittest.TestCase):
         with self.assertRaises(TypeError):
             self.rectangle.x = None
 
+    def test_set_x_with_string(self):
+        """ Test setting width with string"""
+        with self.assertRaises(TypeError):
+            self.rectangle = Rectangle(1, 2, "3")
+        
+    def test_set_x_with_float(self):
+        """ Test setting width with float"""
+        self.rectangle = Rectangle(1, 2)
+        with self.assertRaises(TypeError):
+            self.rectangle.x = "1"
+        
+    def test_set_x_with_negative(self):
+        """ Test setting width with negative"""
+        self.rectangle = Rectangle(1, 2)
+        with self.assertRaises(ValueError):
+            self.rectangle.x= -1
+    
+    def test_set_x_with_negative_1(self):
+        """ Test setting width with zero"""
+        with self.assertRaises(ValueError):
+            self.rectangle = Rectangle(1, 2,-1)
+
 
 class Test_4_RectangleY(unittest.TestCase):
     """Test cases for the 'y' attribute of Rectangle."""
@@ -357,6 +423,28 @@ class Test_4_RectangleY(unittest.TestCase):
         self.rectangle = Rectangle(10, 2, 0, 0, 12.5)
         with self.assertRaises(TypeError):
             self.rectangle.y = None
+    
+    def test_set_y_with_string(self):
+        """ Test setting width with string"""
+        with self.assertRaises(TypeError):
+            self.rectangle = Rectangle(1, 2, 3, "4")
+        
+    def test_set_y_with_float(self):
+        """ Test setting width with float"""
+        self.rectangle = Rectangle(1, 2)
+        with self.assertRaises(TypeError):
+            self.rectangle.y = "1"
+    
+    def test_set_y_with_negative_0(self):
+        """ Test setting width with negative"""
+        self.rectangle = Rectangle(1, 2)
+        with self.assertRaises(ValueError):
+            self.rectangle.y = -1
+    
+    def test_set_y_with_negative_1(self):
+        """ Test setting width with zero"""
+        with self.assertRaises(ValueError):
+            self.rectangle = Rectangle(1, 2, 3, -4)
 
 
 class Test_5_RectangleArea(unittest.TestCase):
@@ -649,65 +737,3 @@ class Test_9_Baseother(unittest.TestCase):
         q1 = Base.to_json_string([q])
         self.assertNotEqual(q1, q)
 
-# class Test_9_RectangeToDIir(unittest.TestCase):
-#     """Test cases for the 'to_dictionary' method of Rectangle."""
-
-#     @classmethod
-#     def setUpClass(cls):
-#         """Common setup code that runs before each test."""
-#         Base.reset()
-
-#     def setUp(self):
-#         """Common setup code that runs before each test."""
-#         self.rectangle = None
-#         Test_9_RectangeToDIir.setUpClass()
-
-#     def tearDown(self):
-#         """Common cleanup code that runs after each test."""
-#         self.rectangle = None
-
-#     def test_to_dictionary_for_default(self):
-#         """Test the 'to_dictionary' method for the default case."""
-#         self.rectangle = Rectangle(10, 2, 1, 9)
-#         expected = {'x': 1, 'y': 9, 'id': 1, 'height': 2, 'width': 10}
-#         self.assertEqual(self.rectangle.to_dictionary(), expected)
-
-#     def test_to_dictionary_for_full_rectangle(self):
-#         """Test the 'to_dictionary' method for a full rectangle."""
-#         self.rectangle = Rectangle(10, 2, 1, 9, 12)
-#         expected = {'x': 1, 'y': 9, 'id': 12, 'height': 2, 'width': 10}
-#         self.assertEqual(self.rectangle.to_dictionary(), expected)
-
-#     def test_to_dictionary_for_custom_rectangle(self):
-#         """Test the 'to_dictionary' method for a custom rectangle."""
-#         self.rectangle = Rectangle(10, 2, 1, 9, 12)
-#         self.rectangle.width = 1
-#         self.rectangle.height = 1
-#         self.rectangle.x = 1
-#         self.rectangle.y = 1
-#         expected = {'x': 1, 'y': 1, 'id': 12, 'height': 1, 'width': 1}
-#         self.assertEqual(self.rectangle.to_dictionary(), expected)
-
-#     def test_to_dictionary_for_more_args(self):
-#         """Test the 'to_dictionary' method for more than 1 argument."""
-#         self.rectangle = Rectangle(10, 2, 1, 9, 12)
-#         with self.assertRaises(TypeError):
-#             self.rectangle.to_dictionary(1)
-
-#     def test_to_dictionary_for_more_kwargs(self):
-#         """Test the 'to_dictionary' method for more than 1 keyword argument."""
-#         self.rectangle = Rectangle(10, 2, 1, 9, 12)
-#         self.rectangle.to_dictionary(x=1, y=1)
-#         self.assertEqual(self.rectangle.to_dictionary(), )
-
-#     def test_to_dictionary_for_no_args(self):
-#         """Test the 'to_dictionary' method for no arguments."""
-#         self.rectangle = Rectangle(10, 2, 1, 9, 12)
-#         with self.assertRaises(TypeError):
-#             self.rectangle.to_dictionary()
-
-#     def test_to_dictionary_for_no_kwargs(self):
-#         """Test the 'to_dictionary' method for no keyword arguments."""
-#         self.rectangle = Rectangle(10, 2, 1, 9, 12)
-#         with self.assertRaises(TypeError):
-#             self.rectangle.to_dictionary()
