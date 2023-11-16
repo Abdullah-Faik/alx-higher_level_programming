@@ -1,0 +1,6 @@
+-- CREATE TAPLE
+CREATE TABLE IF NOT EXISTS first_table (
+    -- CREEATE TAPLE
+    id INT,
+    name VARCHAR(256)
+);
