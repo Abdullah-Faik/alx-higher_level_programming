@@ -1,0 +1,2 @@
+-- PRINT TAPBLE INFO
+SHOW CREATE TABLE first_table;
