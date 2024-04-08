@@ -7,10 +7,8 @@ if (isNaN(q)) {
 else {
     for (let i = 0; i < q; i++) {
         for (let j = 0; j < q; j++) {
-            process.stdout.write('#')
+            process.stdout.write('X')
         }
         process.stdout.write('\n');
     }
 }
-
-
