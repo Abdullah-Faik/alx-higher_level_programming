@@ -12,7 +12,7 @@ if __name__ == "__main__":
     my_password = argv[2]
     d_base = argv[3]
     db = MySQLdb.connect(host=my_host, port=port, user=my_user,
-                     passwd=my_password, db=d_base)
+                         passwd=my_password, db=d_base)
     cur = db.cursor()
     cur.execute("SELECT * FROM states ORDER BY states.id")
     rows = cur.fetchall()
