@@ -15,7 +15,7 @@ if __name__ == "__main__":
     db = sql.connect(host=my_host, port=port, user=my_user,
                      passwd=my_password, db=d_base)
     cur = db.cursor()
-    cur.execute("SELECT * FROM states")
+    cur.execute("SELECT * FROM states ORDER BY states.id")
     rows = cur.fetchall()
     for row in rows:
         print(row)
