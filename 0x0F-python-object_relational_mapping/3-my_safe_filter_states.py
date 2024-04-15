@@ -22,9 +22,10 @@ def main():
 
     cur.execute("""
                 SELECT * FROM states
-                WHERE name = BINARY '{}'
+                WHERE name = BINARY %s
                 ORDER BY states.id
-                """.format(state), )
+                """, (str(state), )
+                )
 
     rows = cur.fetchall()
     for row in rows:
