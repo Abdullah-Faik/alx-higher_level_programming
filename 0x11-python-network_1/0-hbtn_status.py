@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 """print type response """
 
-import urllib.request
+from urllib import request
+
 
 def main():
     """print request"""
-    with urllib.request.urlopen('https://alx-intranet.hbtn.io/status') as res:
+    with request.urlopen('https://alx-intranet.hbtn.io/status') as res:
         body = res.read()
         print(
             'Body response:\n'
