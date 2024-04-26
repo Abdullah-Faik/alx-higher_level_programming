@@ -6,6 +6,7 @@ import urllib.request
 
 
 def main():
+    """print request data"""
     with urllib.request.urlopen('https://alx-intranet.hbtn.io/status') as res:
         body = res.read()
         print(
