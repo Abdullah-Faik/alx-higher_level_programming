@@ -2,8 +2,6 @@
 """print type response """
 
 import urllib
-import urllib.request
-
 
 def main():
     """print request data"""
